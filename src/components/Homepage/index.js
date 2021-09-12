@@ -1,25 +1,15 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-export default function HomePage({ setUserName, setBalance }) {
-  let userName;
-  let balance;
-  function userNameChange(e) {
-    userName = e.target.value;
-  }
-  function balanceChange(e) {
-    balance = e.target.value;
-  }
-  function handlePlayClick() {
-    setUserName(userName);
-    setBalance(balance);
-  }
+export default function HomePage({ setUserName, setBalance, userName, balance }) {
+  useEffect(()=>console.log(userName,balance))
   return (
     <div>
       <label htmlFor="username">Username</label>
       <input
         type="text"
         placeholder="Enter your name"
-        onChange={userNameChange}
+        onChange={e=>setUserName(e.target.value)}
         name="username"
         required
       />
@@ -31,10 +21,11 @@ export default function HomePage({ setUserName, setBalance }) {
         min="500"
         max="10000"
         step="100"
-        onChange={balanceChange}
+        onChange={e=>setBalance(e.target.value)}
         required
       />
-      <button onClick={handlePlayClick}>
+      <button>
+        {/* {balance>500 ? <Link to="/game">Play</Link> : 'min 500'} */}
         <Link to="/game">Play</Link>
       </button>
     </div>
