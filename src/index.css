@@ -1,14 +1,79 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding: 300px;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+		'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	padding: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 80vh;
+	max-width: 100vw;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+#root {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+}
+.mainGame {
+	height: 80%;
+	display: flex;
+}
+.topBar {
+	width: 100%;
+	height: 15%;
+}
+.game {
+	width: 100%;
+	height: 100%;
+}
+.amountSelector {
+	height: 100%;
+	width: 10%;
+}
+.main {
+	width: 90%;
+	height: 100%;
+}
+.dealer {
+	height: 20%;
+	width: 100%;
+}
+.player {
+	height: 80%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+.box {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: center;
+	width: 30%;
+	height: 100%;
+}
+.betAmount {
+	height: 25%;
+	width: 25%;
+	background-color: red;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 1em auto;
+}
+.score {
+	margin: 0;
+}
+.displayName {
+	display: flex;
+	justify-content: space-between;
 }
