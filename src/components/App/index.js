@@ -6,7 +6,7 @@ import Homepage from '../Homepage';
 
 function App() {
 	const [userName, setUserName] = useState('Anonymous');
-	const [balance, setBalance] = useState(0);
+	const [balance, setBalance] = useState(3000);
 	return (
 		<Router>
 			<Switch>

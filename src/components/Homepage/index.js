@@ -38,7 +38,7 @@ export default function HomePage({ setUserName, setBalance, balance }) {
 				max="10000"
 				step="100"
 				onChange={handleBalanceAndDisabled}
-				defaultValue="0"
+				defaultValue="3000"
 				required
 			/>
 
