@@ -1,0 +1,22 @@
+.actionButtons {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 15%;
+	width: 100%;
+}
+.actionButtons div:nth-child(2) {
+	display: inherit;
+	width: 20%;
+	justify-content: inherit;
+	align-items: center;
+}
+.actionButtons div:nth-child(1) {
+	width: 80%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.actionButtons div:nth-child(1) button {
+	margin-right: 0.5em;
+}
