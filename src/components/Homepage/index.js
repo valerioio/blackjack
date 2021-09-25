@@ -45,7 +45,7 @@ export default function HomePage({ setUserName, setBalance, balance }) {
 			{isDisabled ? (
 				<button className="minimum">Over 500 and less 10.000</button>
 			) : (
-				<Link to="/game">
+				<Link to="/blackjack">
 					<button className="playButton">Play</button>
 				</Link>
 			)}

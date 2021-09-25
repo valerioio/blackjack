@@ -1,0 +1,21 @@
+.navBar {
+    display: flex;
+    justify-content: space-between;
+    margin: 1em 3em ;
+    width: 100%;
+}
+
+.navBar ul {
+    display: flex;
+}
+
+
+.navBar li {
+    margin-right: 1em;
+    list-style-type: none;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+}
