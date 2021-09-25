@@ -32,11 +32,11 @@ export default function GamePage({ balance, setBalance }) {
     console.log("playagain");
     setIsGame(false);
     setIsGameOver(false);
-	setPlayerCards([]);
-	setDealerCards([]);
-	setPlayerScore(null);
-	setDealerScore(null);
-	setBetAmount(0);
+    setPlayerCards([]);
+    setDealerCards([]);
+    setPlayerScore(null);
+    setDealerScore(null);
+    setBetAmount(0);
   }
   function handleBetClick() {
     if (balance >= 50 && !isGame) {
@@ -129,6 +129,7 @@ export default function GamePage({ balance, setBalance }) {
               </div>
             </div>
           </div>
+          {playerScore > 21 ? <h1>You busted</h1> : null}
         </div>
         <div className="amountSelector"></div>
       </div>
