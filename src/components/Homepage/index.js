@@ -3,10 +3,8 @@ import EnterCasinoButton from '../EnterCasinoButton';
 import './index.css';
 
 export default function HomePage({ setUserName, setBalance, balance, userName }) {
-	let [inputValue, setInputValue] = useState(balance);
-	let [userNameValue, setUserNameValue] = useState(userName);
-
-	console.log('rerendered');
+	const [inputValue, setInputValue] = useState(balance);
+	const [userNameValue, setUserNameValue] = useState(userName);
 
 	function handleBalanceAndDisabled(e) {
 		setInputValue(e.target.value);

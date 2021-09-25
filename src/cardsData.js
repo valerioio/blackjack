@@ -61,14 +61,14 @@ const initialCards = [
 		name: 'Four of spades',
 		suite: 'spades',
 		value: 4,
-		image: '/cards_images/3_of_spades.png',
+		image: '/cards_images/4_of_spades.png',
 		symbol: '♠',
 	},
 	{
 		name: 'Four of hearts',
 		suite: 'hearts',
 		value: 4,
-		image: '/cards_images/3_of_hearts.png',
+		image: '/cards_images/4_of_hearts.png',
 		symbol: '♥',
 	},
 	{
