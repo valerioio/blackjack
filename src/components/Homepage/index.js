@@ -1,29 +1,19 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './index.css';
+
 export default function HomePage({ setUserName, setBalance, balance, userName }) {
-	let [isDisabled, setDisabled] = useState(false);
 	let [inputValue, setInputValue] = useState(balance);
 	let [userNameValue, setUserNameValue] = useState(userName);
+	const regex = /(^\s*$)|(^[a-zA-Z]\w*$)/;
+	console.log('rerendered');
+
 	function handleBalanceAndDisabled(e) {
-		if (+e.target.value >= 500 && +e.target.value <= 10000 && isDisabled) {
-			setDisabled(false);
-		} else if ((+e.target.value < 500 || +e.target.value > 10000) && !isDisabled) {
-			setDisabled(true);
-		}
 		setInputValue(e.target.value);
-		// console.log(balance);
+		// console.log('from handleBalanceAndDisabled', balance, inputValue);
 	}
 	function handleNameChange(e) {
-		if (e.target.value === '') {
-			setUserNameValue('Anonymous');
-		}
-		setUserNameValue(e.target.value);
-		if (!/^[a-zA-Z]\w*$/.test(e.target.value)) {
-			setDisabled(true);
-		} else {
-			setDisabled(false);
-		}
+		setUserNameValue(e.target.value || 'Anonymous');
 	}
 	function enterCasino() {
 		setBalance(+inputValue);
@@ -37,31 +27,32 @@ export default function HomePage({ setUserName, setBalance, balance, userName })
 				maxLength="10"
 				placeholder="Enter your name"
 				onChange={handleNameChange}
-				// onKeyPress="return /[a-z]/i.test(event.key)"
-				// pattern="[a-zA-Z]\w*"
-				// pattern={/^[a-zA-Z]/}
 				name="username"
-				required
+				// required
 				defaultValue={userName}
 			/>
-
 			<label htmlFor="balance"> Balance: </label>
 			<input
 				type="number"
 				name="balance"
 				min="500"
 				max="10000"
-				step="100"
+				step="10"
 				onChange={handleBalanceAndDisabled}
 				defaultValue={balance}
 				required
 			/>
-
-			{isDisabled ? (
-				<button className="minimum">Over 500 and less 10.000</button>
+			{!(+inputValue >= 500 && +inputValue <= 10000) ? (
+				<button onClick={(e) => e.preventDefault()} className="minimum">
+					Over 500 and less 10.000
+				</button>
+			) : !regex.test(userNameValue) ? (
+				<button onClick={(e) => e.preventDefault()} className="minimum">
+					Input a valid username
+				</button>
 			) : (
 				<Link to="/blackjack">
-					<button className="playButton" type="submit" onSubmit={enterCasino}>
+					<button className="playButton" onClick={enterCasino}>
 						Enter Casino
 					</button>
 				</Link>
