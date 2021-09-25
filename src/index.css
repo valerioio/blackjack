@@ -14,6 +14,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	height: 80vh;
+	padding: 2em;
 	max-width: 100vw;
 }
 
@@ -25,7 +26,6 @@ code {
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	padding-bottom: 5em;
 	height: 100%;
 	width: 100%;
 }
@@ -78,11 +78,8 @@ code {
 	justify-content: center;
 	align-items: center;
 	margin: 1em auto;
+	user-select: none;
 }
 .score {
 	margin: 0;
-}
-.displayName {
-	display: flex;
-	justify-content: space-between;
 }

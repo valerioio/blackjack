@@ -16,6 +16,7 @@ div > label {
 	display: flex;
 	flex-direction: column;
 	min-width: 200px;
+	width: 25%;
 }
 a {
 	margin-top: 1em;
