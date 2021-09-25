@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import EnterCasinoButton from '../EnterCasinoButton';
 import './index.css';
 
 export default function HomePage({ setUserName, setBalance, balance, userName }) {
 	let [inputValue, setInputValue] = useState(balance);
 	let [userNameValue, setUserNameValue] = useState(userName);
-	const regex = /(^\s*$)|(^[a-zA-Z]\w*$)/;
+
 	console.log('rerendered');
 
 	function handleBalanceAndDisabled(e) {
@@ -37,26 +37,16 @@ export default function HomePage({ setUserName, setBalance, balance, userName })
 				name="balance"
 				min="500"
 				max="10000"
-				step="10"
+				step="1"
 				onChange={handleBalanceAndDisabled}
 				defaultValue={balance}
 				required
 			/>
-			{!(+inputValue >= 500 && +inputValue <= 10000) ? (
-				<button onClick={(e) => e.preventDefault()} className="minimum">
-					Over 500 and less 10.000
-				</button>
-			) : !regex.test(userNameValue) ? (
-				<button onClick={(e) => e.preventDefault()} className="minimum">
-					Input a valid username
-				</button>
-			) : (
-				<Link to="/blackjack">
-					<button className="playButton" onClick={enterCasino}>
-						Enter Casino
-					</button>
-				</Link>
-			)}
+			<EnterCasinoButton
+				inputValue={inputValue}
+				userNameValue={userNameValue}
+				enterCasino={enterCasino}
+			/>
 		</form>
 	);
 }
