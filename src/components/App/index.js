@@ -24,7 +24,7 @@ function App() {
 					</li>
 				</ul>
 			</nav>
-			<div className="container">
+			<div className="oldContainer">
 				<Switch>
 					<Route path="/blackjack">
 						<Blackjack balance={balance} setBalance={setBalance} />

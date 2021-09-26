@@ -8,7 +8,20 @@ const cardsArray = [...initialCards, ...initialCards, ...initialCards, ...initia
 const initialCardState = [...shuffle(cardsArray)];
 
 export default function Blackjack({ balance, setBalance }) {
-	const [cards, setCards] = useState(initialCardState);
+	const [cards, setCards] = useState([
+		{ value: 8 },
+		{ value: 7 },
+		{ value: 7 },
+		{ value: 7 },
+		{ value: 1 },
+		{ value: 1 },
+		{ value: 1 },
+		{ value: 1 },
+		{ value: 1 },
+		{ value: 1 },
+		{ value: 2 },
+		{ value: 2 },
+	]);
 	const [betAmount, setBetAmount] = useState(0);
 	const [dealerScore, setDealerScore] = useState(null);
 	const [playerScore, setPlayerScore] = useState(null);
@@ -78,10 +91,10 @@ export default function Blackjack({ balance, setBalance }) {
 	}, [dealerScore]);
 
 	function playAgain() {
-		// console.log('playagain');
+		if (cards.length < 104) {
+			setCards(shuffle(initialCardState));
+		}
 		setState('begin');
-		// setIsGame(false);
-		// setIsGameOver(false);
 		setPlayerCards([]);
 		setDealerCards([]);
 		setPlayerScore(null);
