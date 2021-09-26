@@ -12,7 +12,7 @@ const cardsArray = [
 ];
 const initialCardState = [...shuffle(cardsArray)];
 
-export default function GamePage({ balance, setBalance }) {
+export default function BlackjackPage({ balance, setBalance }) {
   const [cards, setCards] = useState(initialCardState);
   const [betAmount, setBetAmount] = useState(0);
   const [dealerScore, setDealerScore] = useState(null);
