@@ -14,7 +14,9 @@ body {
 	justify-content: center;
 	align-items: center;
 }
-
+button {
+	cursor: pointer;
+}
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
@@ -38,14 +40,7 @@ code {
 	width: 100%;
 	height: 100%;
 }
-.amountSelector {
-	height: 100%;
-	width: 10%;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-	align-items: center;
-}
+
 .main {
 	width: 90%;
 }
@@ -69,17 +64,7 @@ code {
 	width: 30%;
 	height: 100%;
 }
-.betAmount {
-	height: 25%;
-	width: 25%;
-	background-color: red;
-	border-radius: 50%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin: 1em auto;
-	user-select: none;
-}
+
 .score {
 	margin: 0;
 }

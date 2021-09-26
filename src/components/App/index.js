@@ -1,8 +1,9 @@
 import './index.css';
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import GamePage from '../GamePage';
+import Blackjack from '../Blackjack';
 import Homepage from '../Homepage';
+import CasinoMainPage from '../CasinoMainPage';
 
 function App() {
 	const [userName, setUserName] = useState('Anonymous');
@@ -19,14 +20,17 @@ function App() {
 						<Link to="/">Home</Link>
 					</li>
 					<li>
-						<Link to="/blackjack">Blackjack</Link>
+						<Link to="/casinoMainPage">Casino Lobby</Link>
 					</li>
 				</ul>
 			</nav>
 			<div className="container">
 				<Switch>
 					<Route path="/blackjack">
-						<GamePage balance={balance} setBalance={setBalance} />
+						<Blackjack balance={balance} setBalance={setBalance} />
+					</Route>
+					<Route path="/casinoMainPage">
+						<CasinoMainPage />
 					</Route>
 					<Route path="/">
 						<Homepage

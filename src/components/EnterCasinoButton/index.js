@@ -14,7 +14,7 @@ export default function EnterCasinoButton({ inputValue, userNameValue, enterCasi
 					Input a valid username
 				</button>
 			) : (
-				<Link to="/blackjack">
+				<Link to="/casinoMainPage">
 					<button className="playButton" onClick={enterCasino}>
 						Enter Casino
 					</button>

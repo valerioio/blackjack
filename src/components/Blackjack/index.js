@@ -3,21 +3,20 @@ import initialCards from '../../cardsData.js';
 import './index.css';
 import shuffle from '../../functions/shuffle';
 import getScore from '../../functions/getScore';
-
+import { Link } from 'react-router-dom';
 const cardsArray = [...initialCards, ...initialCards, ...initialCards, ...initialCards];
 const initialCardState = [...shuffle(cardsArray)];
 
 export default function Blackjack({ balance, setBalance }) {
 	const [cards, setCards] = useState(initialCardState);
 	const [betAmount, setBetAmount] = useState(0);
-	const [betSize, setBetSize] = useState(5);
 	const [dealerScore, setDealerScore] = useState(null);
 	const [playerScore, setPlayerScore] = useState(null);
-	const [isGame, setIsGame] = useState(null);
 	const [playerCards, setPlayerCards] = useState([]);
 	const [dealerCards, setDealerCards] = useState([]);
-	const [isGameOver, setIsGameOver] = useState(false);
 	const [text, setText] = useState('');
+	const [state, setState] = useState('begin');
+	const [betSize, setBetSize] = useState(5);
 
 	useEffect(() => {
 		if (
@@ -25,14 +24,16 @@ export default function Blackjack({ balance, setBalance }) {
 			playerCards.length === 2 &&
 			(dealerScore < 10 || dealerCards.length > 1)
 		) {
-			setIsGameOver(true);
+			setState('game over');
+			// setIsGameOver(true);
 			setText('You have won, you have BLACKJACK');
 			setBalance(balance + betAmount * 2.5);
 		} else if (playerScore === 21) {
 			drawDealerCard();
 		} else if (playerScore > 21) {
 			setText('You have busted');
-			setIsGameOver(true);
+			setState('game over');
+			//   setIsGameOver(true);
 		}
 	}, [playerScore]);
 
@@ -40,14 +41,16 @@ export default function Blackjack({ balance, setBalance }) {
 		if (dealerCards.length > 1) {
 			if (dealerScore < 17) {
 				if (playerScore === 21 && playerCards.length === 2 && dealerCards.length === 2) {
-					setIsGameOver(true);
+					setState('game over');
+					// setIsGameOver(true);
 					setText('You win');
 					setBalance(balance + betAmount * 2.5);
 					return;
 				}
 				drawDealerCard();
 			} else {
-				setIsGameOver(true);
+				setState('game over');
+				// setIsGameOver(true);
 				if (dealerScore > 21) {
 					setText('You win he busted');
 					setBalance(balance + betAmount * 2);
@@ -76,8 +79,9 @@ export default function Blackjack({ balance, setBalance }) {
 
 	function playAgain() {
 		// console.log('playagain');
-		setIsGame(false);
-		setIsGameOver(false);
+		setState('begin');
+		// setIsGame(false);
+		// setIsGameOver(false);
 		setPlayerCards([]);
 		setDealerCards([]);
 		setPlayerScore(null);
@@ -86,17 +90,19 @@ export default function Blackjack({ balance, setBalance }) {
 		setText('');
 	}
 	function handleBetClick() {
-		if (balance >= 50 && !isGame) {
+		if (balance >= betAmount + betSize && (state === 'begin' || state === 'betting')) {
+			setState('betting');
 			setBetAmount(betAmount + betSize);
-			setBalance(balance - betSize);
 		}
 	}
 	function handleClearClick() {
-		setBalance(balance + betAmount);
+		setState('begin');
 		setBetAmount(0);
 	}
 	function dealGame() {
-		setIsGame(true);
+		setState('game');
+		setBalance(balance - betAmount);
+		// setIsGame(true);
 
 		// const [card1, card2, card3] = cards;
 		// setPlayerCards([card1]);
@@ -127,9 +133,6 @@ export default function Blackjack({ balance, setBalance }) {
 		setDealerCards([...dealerCards, cards[0]]);
 		setDealerScore(getScore([...dealerCards, cards[0]]));
 		setCards(cards.slice(1));
-	}
-	function changeBetAmount(value) {
-		setBetSize(value);
 	}
 	return (
 		<div className="game">
@@ -165,33 +168,30 @@ export default function Blackjack({ balance, setBalance }) {
 								))}
 							</div>
 							<div className="betAmount" onClick={handleBetClick}>
-								{betAmount === 0 ? null : betAmount}
+								{betAmount === 0 ? null : `£${betAmount}`}
 							</div>
 							<div className="actionButtons">
 								<div className="displayBetAndButtons">
 									<p>Bet Size: {betSize}</p>
+
 									<div>
-										{betAmount === 0 || isGame ? null : (
+										{state === 'betting' ? (
 											<button onClick={handleClearClick}>Clear</button>
-										)}
-										{isGame ? (
-											<button onClick={drawPlayerCard} disabled={isGameOver}>
-												Draw
-											</button>
 										) : null}
-										{isGame ? (
-											<button onClick={drawDealerCard} disabled={isGameOver}>
-												Stand
-											</button>
+										{state === 'game' ? (
+											<button onClick={drawPlayerCard}>Draw</button>
+										) : null}
+										{state === 'game' ? (
+											<button onClick={drawDealerCard}>Stand</button>
 										) : null}
 									</div>
 								</div>
 								<div>
-									{isGameOver ? (
+									{state === 'game over' ? (
 										<button onClick={playAgain}>Play again</button>
-									) : betAmount === 0 || isGame ? null : (
+									) : state === 'betting' ? (
 										<button onClick={dealGame}>Deal</button>
-									)}
+									) : null}
 								</div>
 							</div>
 						</div>
@@ -199,6 +199,10 @@ export default function Blackjack({ balance, setBalance }) {
 					<h1>{text}</h1>
 				</div>
 				<div className="amountSelector">
+					<Link to="/casinoMainPage">
+						<button>Casino Lobby</button>
+					</Link>
+					<p>Bet Size</p>
 					{[5, 10, 25, 50, 100].map((item, index) => (
 						<img
 							className="chips"
@@ -206,7 +210,7 @@ export default function Blackjack({ balance, setBalance }) {
 							alt={item}
 							key={index}
 							onClick={() => {
-								changeBetAmount(item);
+								setBetSize(item);
 							}}
 						/>
 					))}
