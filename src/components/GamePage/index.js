@@ -10,6 +10,7 @@ const initialCardState = [...shuffle(cardsArray)];
 export default function Blackjack({ balance, setBalance }) {
 	const [cards, setCards] = useState(initialCardState);
 	const [betAmount, setBetAmount] = useState(0);
+	const [betSize, setBetSize] = useState(5);
 	const [dealerScore, setDealerScore] = useState(null);
 	const [playerScore, setPlayerScore] = useState(null);
 	const [isGame, setIsGame] = useState(null);
@@ -86,8 +87,8 @@ export default function Blackjack({ balance, setBalance }) {
 	}
 	function handleBetClick() {
 		if (balance >= 50 && !isGame) {
-			setBetAmount(betAmount + 50);
-			setBalance(balance - 50);
+			setBetAmount(betAmount + betSize);
+			setBalance(balance - betSize);
 		}
 	}
 	function handleClearClick() {
@@ -127,6 +128,9 @@ export default function Blackjack({ balance, setBalance }) {
 		setDealerScore(getScore([...dealerCards, cards[0]]));
 		setCards(cards.slice(1));
 	}
+	function changeBetAmount(value) {
+		setBetSize(value);
+	}
 	return (
 		<div className="game">
 			<div className="mainGame">
@@ -137,7 +141,12 @@ export default function Blackjack({ balance, setBalance }) {
 							<p>Score: {dealerScore} </p>
 							<div className="showCards">
 								{dealerCards.map((card, index) => (
-									<img key={index} src={card.image} alt={card.name} />
+									<img
+										key={index}
+										src={card.image}
+										alt={card.name}
+										className="cardImage"
+									/>
 								))}
 							</div>
 						</div>
@@ -147,27 +156,35 @@ export default function Blackjack({ balance, setBalance }) {
 							<p className="score">Player score :{playerScore}</p>
 							<div className="showCards">
 								{playerCards.map((card, index) => (
-									<img key={index} src={card.image} alt={card.name} />
+									<img
+										key={index}
+										src={card.image}
+										alt={card.name}
+										className="cardImage"
+									/>
 								))}
 							</div>
 							<div className="betAmount" onClick={handleBetClick}>
 								{betAmount === 0 ? null : betAmount}
 							</div>
 							<div className="actionButtons">
-								<div>
-									{betAmount === 0 || isGame ? null : (
-										<button onClick={handleClearClick}>Clear</button>
-									)}
-									{isGame ? (
-										<button onClick={drawPlayerCard} disabled={isGameOver}>
-											Draw
-										</button>
-									) : null}
-									{isGame ? (
-										<button onClick={drawDealerCard} disabled={isGameOver}>
-											Stand
-										</button>
-									) : null}
+								<div className="displayBetAndButtons">
+									<p>Bet Size: {betSize}</p>
+									<div>
+										{betAmount === 0 || isGame ? null : (
+											<button onClick={handleClearClick}>Clear</button>
+										)}
+										{isGame ? (
+											<button onClick={drawPlayerCard} disabled={isGameOver}>
+												Draw
+											</button>
+										) : null}
+										{isGame ? (
+											<button onClick={drawDealerCard} disabled={isGameOver}>
+												Stand
+											</button>
+										) : null}
+									</div>
 								</div>
 								<div>
 									{isGameOver ? (
@@ -181,7 +198,19 @@ export default function Blackjack({ balance, setBalance }) {
 					</div>
 					<h1>{text}</h1>
 				</div>
-				<div className="amountSelector"></div>
+				<div className="amountSelector">
+					{[5, 10, 25, 50, 100].map((item, index) => (
+						<img
+							className="chips"
+							src={`/chips/${item}.png`}
+							alt={item}
+							key={index}
+							onClick={() => {
+								changeBetAmount(item);
+							}}
+						/>
+					))}
+				</div>
 			</div>
 		</div>
 	);

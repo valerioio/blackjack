@@ -14,8 +14,9 @@
 .actionButtons div:nth-child(1) {
 	width: 80%;
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
+	padding-right: 2em;
 }
 .actionButtons div:nth-child(1) button {
 	margin-right: 0.5em;
@@ -27,4 +28,19 @@
 .showCards img {
 	width: 4vw;
 	height: 12vh;
+}
+.cardImage {
+	animation: fadeIn ease-in-out 0.7s;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+		transform: rotateZ(0deg);
+		scale: 0;
+	}
+	100% {
+		transform: rotateZ(720deg);
+		scale: 1;
+	}
 }
